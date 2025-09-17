@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Homepage } from "@/components/Types/definitions";
+import { Homepage } from "@/components/types/definitions";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 interface TestimonialsProps {
     Testimonials: Homepage['Testimonials'];

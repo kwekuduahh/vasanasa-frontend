@@ -1,4 +1,4 @@
-import { Homepage } from '@/components/Types/definitions';
+import { Homepage } from '@/components/types/definitions';
 import axiosClient from './axios.client';
 import { AxiosResponse } from 'axios';
 

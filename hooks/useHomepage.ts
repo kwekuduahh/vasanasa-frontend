@@ -1,4 +1,4 @@
-import { Homepage } from '@/components/Types/definitions';
+import { Homepage } from '@/components/types/definitions';
 
 // This is now a server-side data fetching function, not a React hook
 export default function useHomepage(data: Homepage) {
