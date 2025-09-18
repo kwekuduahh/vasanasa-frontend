@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+//lively-renewal-0a08dcffa9.strapiapp.com/
+
 const axiosClient = axios.create({
-	baseURL: 'http://localhost:1337',
+	baseURL: 'https://lively-renewal-0a08dcffa9.strapiapp.com',
 });
 
 export default axiosClient;
