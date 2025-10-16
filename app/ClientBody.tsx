@@ -17,7 +17,14 @@ export default function ClientBody({
         document.body.className = "antialiased";
     }, []);
 
-    const queryClient = new QueryClient();
+    const queryClient = new QueryClient({
+        defaultOptions: {
+            queries: {
+                refetchOnMount: false,
+                refetchOnWindowFocus: false
+            }
+        }
+    });
 
     return (
         <>

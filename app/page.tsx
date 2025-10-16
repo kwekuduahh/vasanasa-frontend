@@ -23,6 +23,7 @@ export default function Home() {
 
   const { getHeroSection, getTestimonials, getFounderQuoteSection } = useHomepage(data.data);
 
+
   const heroSection = getHeroSection();
   const testimonials = getTestimonials();
   const founderQuoteSection = getFounderQuoteSection();
