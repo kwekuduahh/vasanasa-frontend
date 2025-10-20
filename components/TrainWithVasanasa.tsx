@@ -1,8 +1,17 @@
 import Image from "next/image";
 import LinkButton from "./ui/LinkButton";
 import { BlurFade } from "./magicui/blur-fade";
+import { defineQuery } from "next-sanity";
+import { sanityFetch } from "@/app/sanity/live";
 
-export default function TrainWithVasanasa() {
+const TRAIN_WITH_VASANASA_QUERY = defineQuery(`*[_type == "landingPage"]{
+  trainWithVasanasaSection
+}[0]`);
+
+export default async function TrainWithVasanasa() {
+
+    const trainWithVasanasa = await sanityFetch({ query: TRAIN_WITH_VASANASA_QUERY });
+
     return (
         <section className="w-full bg-[#1d49a8] relative">
             <div className="absolute inset-0 flex justify-center items-center w-full">
@@ -20,7 +29,7 @@ export default function TrainWithVasanasa() {
                                 train with vasanasa
                             </span>
                             <p className="text-sm sm:text-base lg:text-lg font-sora font-normal leading-2 text-left text-[#ffffff] w-full lg:w-[60%]">
-                                Learn The Exact Steps To Set up, Grow And Scale Highly Successful Business Ideas
+                                {trainWithVasanasa.data.trainWithVasanasaSection.title}
                             </p>
                         </BlurFade>
                     </div>

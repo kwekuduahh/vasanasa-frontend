@@ -3,15 +3,17 @@ import LinkButton from "@/components/ui/LinkButton";
 import { BlurFade } from "./magicui/blur-fade";
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/app/sanity/live";
+import { urlFor } from "@/app/sanity/image";
 
 const ABOUT_SECTION_QUERY = defineQuery(`*[_type == "landingPage"]{
-  founderQuoteSection
+  founderQuoteSection,
 }[0]`);
 
 export default async function AboutSection() {
 
     const aboutSection = await sanityFetch({ query: ABOUT_SECTION_QUERY });
 
+    const imageUrl = urlFor(aboutSection.data.founderQuoteSection.founderImage.asset).url();
     return (
         <section className="w-full bg-[#ffffff] py-10 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
             <div className="w-full Container">
@@ -31,7 +33,7 @@ export default async function AboutSection() {
                             </p>
                             <div className="flex gap-3 justify-start items-center w-full mt-1">
                                 <Image
-                                    src="/images/img_ellipse_2.png"
+                                    src={imageUrl}
                                     alt="Monica Korkor Bleboo"
                                     width={48}
                                     height={48}

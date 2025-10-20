@@ -103,7 +103,7 @@ export interface ImageAsset {
 	url: string;
 	previewUrl: string | null;
 	provider: string;
-	provider_metadata: any | null;
+	provider_metadata: string | null;
 	createdAt: string;
 	updatedAt: string;
 	publishedAt: string;
