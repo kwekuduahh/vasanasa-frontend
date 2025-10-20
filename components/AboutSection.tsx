@@ -12,7 +12,6 @@ const ABOUT_SECTION_QUERY = defineQuery(`*[_type == "landingPage"]{
 export default async function AboutSection() {
 
     const aboutSection = await sanityFetch({ query: ABOUT_SECTION_QUERY });
-
     const imageUrl = urlFor(aboutSection.data.founderQuoteSection.founderImage.asset).url();
     return (
         <section className="w-full bg-[#ffffff] py-10 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">

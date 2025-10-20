@@ -9,6 +9,7 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel"
 import Image from "next/image"
+import { urlFor } from "@/app/sanity/image"
 
 interface Testimonial {
     _key: number
@@ -47,7 +48,7 @@ export default function TestimonialCarousel({ testimonials }: TestimonialCarouse
                             </p>
                             <div className="flex gap-3 justify-start items-center w-full">
                                 <Image
-                                    src="/images/bijou.jpeg"
+                                    src={urlFor(testimonial.testorImage.asset).width(50).height(50).url()}
                                     alt={testimonial.testorTitle ? testimonial.testorTitle : 'Testimonials Image'}
                                     width={48}
                                     height={48}

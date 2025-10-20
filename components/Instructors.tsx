@@ -1,20 +1,17 @@
 import Image from "next/image";
 import { BlurFade } from "./magicui/blur-fade";
+import { defineQuery } from "next-sanity";
+import { sanityFetch } from "@/app/sanity/live";
+import { urlFor } from "@/app/sanity/image";
 
-export default function Instructors() {
-    const instructors = [
-        {
-            name: "Monica Korkor Bleboo",
-            role: "CEO, Lead Instructor",
-            image: "https://ext.same-assets.com/1979085349/2255628922.png"
-        },
-        {
-            name: "Peter Amartey Agbeko, APR",
-            role: "CEO, Lead Instructor",
-            image: "https://ext.same-assets.com/1979085349/1195462709.png"
-        }
-    ];
 
+const INSTRUCTORS_QUERY = defineQuery(`*[_type == "landingPage"]{
+  instructorsSection
+}[0]`)
+
+export default async function Instructors() {
+
+    const instructors = await sanityFetch({ query: INSTRUCTORS_QUERY })
     return (
         <section className="w-full bg-[#1d49a8] relative">
             <div className="absolute inset-0 flex justify-center items-center w-full">
@@ -35,47 +32,32 @@ export default function Instructors() {
                         </BlurFade>
                     </div>
                     <div className="flex flex-col sm:flex-row gap-[16px] w-full lg:w-[48%] lg:ml-[131px]">
-                        <BlurFade duration={0.5} direction="up" inView={true} blur={"10px"} inViewMargin="10px" className="flex flex-col gap-[10px] justify-start items-center w-full sm:w-[308px]">
-                            <div className="flex justify-center items-center w-auto">
-                                <Image
-                                    src="/images/monica-small.png"
-                                    alt="Monica Korkor Bleboo"
-                                    width={300}
-                                    height={200}
-                                    className="w-full rounded-[8px]"
-                                />
-                            </div>
-                            <div className="flex flex-col justify-start items-start w-full">
-                                <span className="text-xs font-rubik font-normal leading-2 text-left text-[#bdcef3]">
-                                    CEO, Lead Instructor
-                                </span>
-                                <span className="text-sm sm:text-base lg:text-lg font-rubik font-medium leading-2 text-left text-[#f1f1f1]">
-                                    Monica Korkor Bleboo
-                                </span>
-                            </div>
-                        </BlurFade>
-                        <BlurFade duration={0.5} direction="up" inView={true} blur={"10px"} inViewMargin="10px" className="flex flex-col gap-[10px] justify-start items-center w-full sm:w-[308px]">
-                            <div className="flex justify-center items-center w-auto">
-                                <Image
-                                    src="/images/peter-small.png"
-                                    alt="Peter Amartey Agbeko"
-                                    width={300}
-                                    height={200}
-                                    className="w-full rounded-[8px]"
-                                />
-                            </div>
-                            <div className="flex flex-col gap-[2px] justify-center items-start w-full">
-                                <span className="text-xs font-rubik font-normal leading-2 text-left text-[#bdcef3]">
-                                    Communication Specialist, Instructor
-                                </span>
-                                <span className="text-sm sm:text-base lg:text-lg font-rubik font-medium leading-2 text-left text-[#f1f1f1]">
-                                    Peter Amartey Agbeko, APR
-                                </span>
-                            </div>
-                        </BlurFade>
+                        {
+                            instructors.data.instructorsSection.instructors.map((instructor: any, index: number) => (
+                                <BlurFade key={index} duration={0.5} direction="up" inView={true} blur={"10px"} inViewMargin="10px" className="flex flex-col gap-[10px] justify-start items-center w-full sm:w-[308px]">
+                                    <div className="flex justify-center items-start w-full">
+                                        <Image
+                                            src={urlFor(instructor.instructorImage.asset).url()}
+                                            alt={instructor.instructorTitle}
+                                            width={300}
+                                            height={200}
+                                            className="w-full rounded-[8px]"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col justify-start items-start w-full">
+                                        <span className="text-xs font-rubik font-normal leading-2 text-left text-[#bdcef3]">
+                                            {instructor.instructorTitle}
+                                        </span>
+                                        <span className="text-sm sm:text-base lg:text-lg font-rubik font-medium leading-2 text-left text-[#f1f1f1]">
+                                            {instructor.instructorName}
+                                        </span>
+                                    </div>
+                                </BlurFade>
+                            ))
+                        }
                     </div>
                 </div>
             </div>
-        </section>
+        </section >
     );
 }

@@ -8,7 +8,10 @@ const nextConfig: NextConfig = {
 				protocol: 'https',
 				hostname: 'ext.same-assets.com',
 			},
-			{ protocol: 'https', hostname:'cdn.sanity.io'}
+			{
+				protocol: 'https',
+				hostname: 'cdn.sanity.io',
+			},
 		],
 	},
 };
