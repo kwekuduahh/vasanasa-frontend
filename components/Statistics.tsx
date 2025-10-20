@@ -17,8 +17,8 @@ const STATISTICS_QUERY = defineQuery(`*[_type == "landingPage"]{
 
 export default async function Statistics() {
     const statistics = await sanityFetch({ query: STATISTICS_QUERY });
-
     const imageUrl = urlFor(statistics.data.businessStatsSection.sectionImage.asset).url()
+
     return (
         <section className="w-full bg-[#f2f1fd]">
             <div className="w-full">
