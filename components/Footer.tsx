@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-import Button from '@/components/ui/Button';
 import LinkButton from './ui/LinkButton';
 import Image from 'next/image';
 import Link from 'next/link';
