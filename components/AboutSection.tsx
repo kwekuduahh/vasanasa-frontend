@@ -1,13 +1,17 @@
 import Image from "next/image";
 import LinkButton from "@/components/ui/LinkButton";
 import { BlurFade } from "./magicui/blur-fade";
+import { defineQuery } from "next-sanity";
+import { sanityFetch } from "@/app/sanity/live";
 
-interface AboutSectionProps {
-    title?: string;
-    body?: string;
-}
+const ABOUT_SECTION_QUERY = defineQuery(`*[_type == "landingPage"]{
+  founderQuoteSection
+}[0]`);
 
-export default function AboutSection({ title, body }: AboutSectionProps) {
+export default async function AboutSection() {
+
+    const aboutSection = await sanityFetch({ query: ABOUT_SECTION_QUERY });
+
     return (
         <section className="w-full bg-[#ffffff] py-10 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
             <div className="w-full Container">
@@ -23,7 +27,7 @@ export default function AboutSection({ title, body }: AboutSectionProps) {
                     <div className="flex flex-col gap-3 justify-start items-start w-full lg:w-auto lg:flex-1 lg:ml-[91px]">
                         <BlurFade duration={0.5} direction="up" inView={true} blur={"10px"} inViewMargin="10px">
                             <p className="text-xl md:text-xl lg:text-2xl font-sora font-normal leading-6 md:leading-7 lg:leading-8 text-left text-[#272865] w-full lg:w-[80%]">
-                                {`"${body}"`}
+                                {`"${aboutSection.data.founderQuoteSection.quote}"`}
                             </p>
                             <div className="flex gap-3 justify-start items-center w-full mt-1">
                                 <Image
@@ -35,10 +39,10 @@ export default function AboutSection({ title, body }: AboutSectionProps) {
                                 />
                                 <div className="flex flex-col gap-[4px] justify-start items-start">
                                     <span className="text-[14px] sm:text-[15px] lg:text-[16px] font-rubik font-medium leading-[17px] sm:leading-[18px] lg:leading-[20px] text-left text-[#040404]">
-                                        Monica Korkor Bleboo
+                                        {aboutSection.data.founderQuoteSection.name}
                                     </span>
                                     <span className="text-[11px] sm:text-[11.5px] lg:text-[12px] font-rubik font-medium leading-[13px] sm:leading-[14px] lg:leading-[15px] text-left text-[#7d7d7d]">
-                                        CEO, Lead Instructor
+                                        {aboutSection.data.founderQuoteSection.roleTitle}
                                     </span>
                                 </div>
                             </div>

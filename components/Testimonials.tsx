@@ -1,11 +1,20 @@
 import Image from "next/image";
 import { Homepage } from "@/components/types/definitions";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
+import { defineQuery } from "next-sanity";
+import { sanityFetch } from "@/app/sanity/live";
 interface TestimonialsProps {
     Testimonials: Homepage['Testimonials'];
 }
 
-export default function Testimonials({ Testimonials }: TestimonialsProps) {
+const TESTIMONIALS_QUERY = defineQuery(`
+    *[_type == "landingPage"]{
+  testimonialsSection
+}[0]`)
+
+export default async function Testimonials() {
+
+    const testimonials = await sanityFetch({ query: TESTIMONIALS_QUERY });
     return (
         <section className="w-full bg-[#ffffff] py-[24px] sm:py-[36px] lg:py-[48px]">
             <div className="w-full Container px-4 sm:px-6 lg:px-[100px]">
@@ -16,7 +25,7 @@ export default function Testimonials({ Testimonials }: TestimonialsProps) {
                                 Hear from our Clients
                             </span>
                         </div>
-                        <TestimonialCarousel testimonials={Testimonials} />
+                        <TestimonialCarousel testimonials={testimonials.data.testimonialsSection} />
                     </div>
                     <div className="w-full lg:w-[46%]">
                         <div className="flex flex-col gap-[58px] justify-start items-center w-full ml-0 lg:ml-[92px]">

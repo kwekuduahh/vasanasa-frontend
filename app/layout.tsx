@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "@/app/globals.css";
 import ClientBody from "./ClientBody";
 import Script from "next/script";
+import { SanityLive } from "./sanity/live";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,7 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning>
         <ClientBody>{children}</ClientBody>
+        <SanityLive />
       </body>
     </html>
   );

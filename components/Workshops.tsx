@@ -54,13 +54,13 @@ export default function Workshops() {
                         </div>
                     </div>
                     <div className="flex flex-col lg:flex-row gap-[48px] justify-center items-center w-full lg:w-[74%]">
-                        <BlurFade duration={0.5} direction="up" inView={true} blur={"10px"} inViewMargin="10px" className="relative w-full lg:w-[38%] hidden md:block lg:block">
+                        <BlurFade duration={0.5} direction="up" inView={true} blur={"10px"} inViewMargin="10px" className="relative w-full lg:w-[38%] hidden lg:block">
                             <Image
                                 src="/images/workshopImage.png"
                                 alt="Workshop"
                                 width={1000}
                                 height={800}
-                                className="mx-auto my-auto object-cover hidden md:block lg:block"
+                                className="mx-auto my-auto object-cover hidden lg:block"
                             />
                         </BlurFade>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full lg:flex-1">
